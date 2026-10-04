@@ -1,4 +1,4 @@
-# @sunkit/react-middle-truncate
+# @sunkitjs/react-middle-truncate
 
 Pixel-accurate **middle** ellipsis for React. Keeps both the start and the end of a string
 visible — the parts that matter for wallet addresses, transaction hashes, file names, URLs and IDs.
@@ -25,13 +25,13 @@ quarterly-financial-report-final.xlsx        →   quarterly-fin…final.xlsx
 ## Install
 
 ```bash
-pnpm add @sunkit/react-middle-truncate
+pnpm add @sunkitjs/react-middle-truncate
 ```
 
 ## Usage
 
 ```tsx
-import { MiddleTruncate } from '@sunkit/react-middle-truncate'
+import { MiddleTruncate } from '@sunkitjs/react-middle-truncate'
 
 // Balanced: as much of the start and end as fits
 <MiddleTruncate>{filePath}</MiddleTruncate>
@@ -59,7 +59,7 @@ For a width-independent format — e.g. `0x71C7…976F` in a toast or an `aria-l
 helper. It runs on the server too.
 
 ```ts
-import { truncateMiddle } from '@sunkit/react-middle-truncate'
+import { truncateMiddle } from '@sunkitjs/react-middle-truncate'
 
 truncateMiddle('0x71C7656EC7ab88b098defB751B7401B5f6d8976F', { start: 6, end: 4 })
 // → '0x71C7…976F'

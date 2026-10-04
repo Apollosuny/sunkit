@@ -4,8 +4,8 @@ A pnpm monorepo that ships React UI through **two channels**:
 
 | Channel | Lives in | Consumers get | Use it for |
 |---|---|---|---|
-| **npm packages** `@sunkit/*` | `packages/<name>/` | `pnpm add @sunkit/<name>`, versioned updates | Headless, logic-heavy code where bug fixes must reach every consumer (text measuring, truncation, PWA install, decimal input) |
-| **shadcn registry** `@sunkit/<item>` | `apps/www/registry/<name>/` | `shadcn add` copies the source in | Styled compositions of shadcn primitives (stat card, status badge, confirm dialog, data table) that consumers will tweak |
+| **npm packages** `@sunkitjs/*` | `packages/<name>/` | `pnpm add @sunkitjs/<name>`, versioned updates | Headless, logic-heavy code where bug fixes must reach every consumer (text measuring, truncation, PWA install, decimal input) |
+| **shadcn registry** `@sunkitjs/<item>` | `apps/www/registry/<name>/` | `shadcn add` copies the source in | Styled compositions of shadcn primitives (stat card, status badge, confirm dialog, data table) that consumers will tweak |
 
 Rule of thumb: if a consumer would want to *edit* it, it is a registry item; if they would want
 to *upgrade* it, it is a package. A registry item may depend on a package (list it in the item's
@@ -42,20 +42,20 @@ Run everything from the repo root and always scope to what you changed.
 pnpm dev                                   # docs site
 pnpm --filter www typecheck | lint | build
 pnpm registry:build                        # regenerate apps/www/public/r
-pnpm --filter @sunkit/<name> test          # one package only
+pnpm --filter @sunkitjs/<name> test          # one package only
 pnpm changeset                             # record a version bump for a package change
 ```
 
 ## Adding an npm package
 
-1. Create `packages/<name>/` with `package.json` named `@sunkit/<name>`, `"sideEffects": false`,
+1. Create `packages/<name>/` with `package.json` named `@sunkitjs/<name>`, `"sideEffects": false`,
    `"files": ["dist"]`, `publishConfig.access: "public"`, React as a **peer** dependency, and a
    conditional `exports` map (import/require × types/default).
 2. `tsconfig.json` extends `../../tsconfig.base.json`; build with tsup.
 3. Client-only packages ship `"use client"` on line 1 of every bundle. tsup's treeshake strips
    `banner`, so prepend it in a post-build script (see react-truncate `scripts/prepend-use-client.mjs`).
 4. Zero runtime dependencies unless there is a strong reason.
-5. Tests next to the source; `pnpm --filter @sunkit/<name> test` must pass.
+5. Tests next to the source; `pnpm --filter @sunkitjs/<name> test` must pass.
 6. Add a docs page in `apps/www/app/` and a `pnpm changeset` entry.
 
 ## Adding a registry item
@@ -76,7 +76,7 @@ pnpm changeset                             # record a version bump for a package
    }
    ```
 
-   - `dependencies`: npm packages (including `@sunkit/*`).
+   - `dependencies`: npm packages (including `@sunkitjs/*`).
    - `registryDependencies`: shadcn names, or full URLs to other items in this registry.
    - Never list `*-demo.tsx` in `files`; never vendor a copy of a primitive into `registry/`.
 3. Add a docs page under `apps/www/app/` showing the demo and the install command.
@@ -105,23 +105,23 @@ pnpm changeset                             # record a version bump for a package
 ## Release
 
 - Packages: `pnpm changeset` → `pnpm version-packages` → `pnpm release` (manual, needs `npm login`
-  with access to the `@sunkit` org).
+  with access to the `@sunkitjs` org).
 - Registry: deploy `apps/www`; items are served from `/r/<name>.json`.
 
 ## Consumer usage (for docs)
 
 ```bash
-pnpm add @sunkit/<package>
+pnpm add @sunkitjs/<package>
 pnpm dlx shadcn@latest add https://sunkit.dev/r/<item>.json
 ```
 
 Or namespaced, in the consumer's `components.json`:
 
 ```json
-{ "registries": { "@sunkit": "https://sunkit.dev/r/{name}.json" } }
+{ "registries": { "@sunkitjs": "https://sunkit.dev/r/{name}.json" } }
 ```
 
-then `pnpm dlx shadcn@latest add @sunkit/<item>`.
+then `pnpm dlx shadcn@latest add @sunkitjs/<item>`.
 
 ## Backlog
 

@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { MiddleTruncate } from "@sunkit/react-middle-truncate"
+import { MiddleTruncate } from "@sunkitjs/react-middle-truncate"
 
 const SAMPLES = [
   {

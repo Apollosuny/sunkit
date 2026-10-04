@@ -2,7 +2,7 @@
 
 React UI building blocks, shipped two ways:
 
-- **npm packages** — headless, versioned: `pnpm add @sunkit/<package>`
+- **npm packages** — headless, versioned: `pnpm add @sunkitjs/<package>`
 - **shadcn registry** — styled components copied into your project:
   `pnpm dlx shadcn@latest add https://sunkit.dev/r/<item>.json`
 

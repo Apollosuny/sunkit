@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { truncateMiddle } from "@sunkit/react-middle-truncate"
+import { truncateMiddle } from "@sunkitjs/react-middle-truncate"
 
 import { MiddleTruncateDemo } from "@/components/demos/middle-truncate-demo"
 
@@ -29,7 +29,7 @@ export default function Page() {
       <section className="flex flex-col gap-3">
         <h2 className="text-lg font-medium">Install</h2>
         <pre className="overflow-x-auto rounded-lg bg-muted px-4 py-3 text-sm">
-          <code>pnpm add @sunkit/react-middle-truncate</code>
+          <code>pnpm add @sunkitjs/react-middle-truncate</code>
         </pre>
       </section>
 
@@ -41,7 +41,7 @@ export default function Page() {
       <section className="flex flex-col gap-3">
         <h2 className="text-lg font-medium">Usage</h2>
         <pre className="overflow-x-auto rounded-lg bg-muted px-4 py-3 text-sm">
-          <code>{`import { MiddleTruncate } from "@sunkit/react-middle-truncate"
+          <code>{`import { MiddleTruncate } from "@sunkitjs/react-middle-truncate"
 
 <MiddleTruncate end={4} className="min-w-0 font-mono">
   {address}

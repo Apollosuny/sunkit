@@ -3,7 +3,7 @@ import Link from "next/link"
 const PACKAGES = [
   {
     href: "/docs/react-middle-truncate",
-    name: "@sunkit/react-middle-truncate",
+    name: "@sunkitjs/react-middle-truncate",
     description: "Pixel-accurate middle ellipsis for addresses, hashes and file names.",
   },
 ]

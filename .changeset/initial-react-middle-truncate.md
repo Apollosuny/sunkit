@@ -1,5 +1,5 @@
 ---
-"@sunkit/react-middle-truncate": minor
+"@sunkitjs/react-middle-truncate": minor
 ---
 
 Initial release: `<MiddleTruncate>` (pixel-accurate middle ellipsis with fixed tail, balanced split,
