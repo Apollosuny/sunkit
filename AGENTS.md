@@ -125,11 +125,19 @@ then `pnpm dlx shadcn@latest add @sunkitjs/<item>`.
 
 ## Backlog
 
-Prioritised from a survey of existing Cyberk / Workspace projects (components re-implemented 3+ times).
+From a survey of existing Cyberk / Workspace projects plus ecosystem research (GitHub issues,
+State of React / HTML 2025, AI-app UIs). Aim for niches where the subtle part is browser quirks,
+timing or hydration, so consumers would rather upgrade a package than regenerate the code.
+Out of scope: text-only utilities beyond the two shipped, PWA install, decimal input (exists
+in-house), streaming markdown / partial JSON (well served).
 
-Packages:
-- `react-middle-truncate` — pixel-accurate middle ellipsis (addresses, hashes, file names).
-- `use-pwa-install` — headless install prompt: `beforeinstallprompt`, iOS Safari, standalone detection.
+Packages, shipped: `react-middle-truncate`, `react-time`.
+
+Packages, next candidates:
+- `react-keyboard-inset` — keep bottom-fixed UI above the on-screen keyboard (`visualViewport`,
+  VirtualKeyboard API, `interactive-widget`). Strongest evidence; needs real iOS / Android testing.
+- Chat viewport kit — anchor the sent message to the top while the reply streams, IME-safe
+  Enter-to-send (Safari keyCode 229), client-side stream smoothing.
 
 Registry, wave 1: `status-badge`, `stat-card`, `empty-state` / `error-state` / loading skeletons, `copy-button`.
 Registry, wave 2: `confirm-dialog` + `useConfirm`, `search-input` (debounced), `responsive-dialog`.

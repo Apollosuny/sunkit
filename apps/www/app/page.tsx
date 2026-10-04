@@ -6,6 +6,11 @@ const PACKAGES = [
     name: "@sunkitjs/react-middle-truncate",
     description: "Pixel-accurate middle ellipsis for addresses, hashes and file names.",
   },
+  {
+    href: "/docs/react-time",
+    name: "@sunkitjs/react-time",
+    description: "Hydration-safe relative time, local time and countdowns on one shared clock.",
+  },
 ]
 
 export default function Page() {
