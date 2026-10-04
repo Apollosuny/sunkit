@@ -1,6 +1,6 @@
 {
   "name": "@sunkitjs/react-middle-truncate",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Pixel-accurate middle ellipsis for React: keep the start and end of addresses, hashes and file names visible. Grapheme-safe, accessible, SSR-ready, zero dependencies.",
   "keywords": [
     "react",
