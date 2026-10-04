@@ -1,6 +1,6 @@
 {
   "name": "@sunkitjs/react-time",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Hydration-safe dates for React: live relative time, local time and countdowns on one shared, wall-clock-aligned clock with server time offset. SSR/RSC-ready, zero dependencies.",
   "keywords": [
     "react",
