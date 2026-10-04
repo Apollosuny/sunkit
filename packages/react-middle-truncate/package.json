@@ -22,11 +22,11 @@
   "author": "apollosuny",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Apollosuny/ui-kit.git",
+    "url": "git+https://github.com/Apollosuny/sunkit.git",
     "directory": "packages/react-middle-truncate"
   },
   "bugs": {
-    "url": "https://github.com/Apollosuny/ui-kit/issues"
+    "url": "https://github.com/Apollosuny/sunkit/issues"
   },
   "exports": {
     ".": {
