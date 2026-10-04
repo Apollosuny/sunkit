@@ -1,0 +1,77 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  www:
+    name: Docs & registry
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm --filter www typecheck
+      - run: pnpm --filter www lint
+      - run: pnpm --filter www registry:build
+
+      - name: Verify committed registry output is up to date
+        run: git diff --exit-code -- apps/www/public/r
+
+      - run: pnpm --filter www build
+
+  packages:
+    name: Packages
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Full history so `[origin/main]` filters can diff against the base branch.
+          fetch-depth: 0
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      # On PRs only packages changed since the base branch (and their dependents) run;
+      # on main every package runs. `www` is covered by the job above.
+      # (pnpm rejects a `{dir}[since]` selector, hence the separate `!www` exclusion.)
+      - name: Select packages
+        id: scope
+        # Pass event data through env, never inline `${{ }}` into the script (script injection).
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          BASE_REF: ${{ github.base_ref }}
+        run: |
+          if [ "$EVENT_NAME" = "pull_request" ]; then
+            echo "filter=...[origin/$BASE_REF]" >> "$GITHUB_OUTPUT"
+          else
+            echo "filter=./packages/*" >> "$GITHUB_OUTPUT"
+          fi
+
+      - run: pnpm -r --filter "${{ steps.scope.outputs.filter }}" --filter "!www" --if-present typecheck
+      - run: pnpm -r --filter "${{ steps.scope.outputs.filter }}" --filter "!www" --if-present test
+      - run: pnpm -r --filter "${{ steps.scope.outputs.filter }}" --filter "!www" --if-present build

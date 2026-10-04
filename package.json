@@ -1,0 +1,21 @@
+{
+  "name": "duniverse",
+  "private": true,
+  "packageManager": "pnpm@10.7.1",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "pnpm --filter www dev",
+    "build": "pnpm -r --if-present build",
+    "typecheck": "pnpm -r --if-present typecheck",
+    "lint": "pnpm -r --if-present lint",
+    "registry:build": "pnpm --filter www registry:build",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "pnpm -r --filter \"./packages/**\" build && changeset publish"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^3.0.3"
+  }
+}
