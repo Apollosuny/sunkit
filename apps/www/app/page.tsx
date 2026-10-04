@@ -1,19 +1,41 @@
-import { Button } from "@/components/ui/button"
+import Link from "next/link"
+
+const PACKAGES = [
+  {
+    href: "/docs/react-middle-truncate",
+    name: "@sunkit/react-middle-truncate",
+    description: "Pixel-accurate middle ellipsis for addresses, hashes and file names.",
+  },
+]
 
 export default function Page() {
   return (
-    <div className="flex min-h-svh p-6">
-      <div className="flex max-w-md min-w-0 flex-col gap-4 text-sm leading-loose">
-        <div>
-          <h1 className="font-medium">Project ready!</h1>
-          <p>You may now add components and start building.</p>
-          <p>We&apos;ve already added the button component for you.</p>
-          <Button className="mt-2">Button</Button>
-        </div>
-        <div className="font-mono text-xs text-muted-foreground">
-          (Press <kbd>d</kbd> to toggle dark mode)
-        </div>
-      </div>
-    </div>
+    <main className="mx-auto flex max-w-3xl flex-col gap-10 px-4 py-12">
+      <header className="flex flex-col gap-2">
+        <h1 className="text-3xl font-semibold tracking-tight">sunkit</h1>
+        <p className="text-muted-foreground">
+          React UI building blocks: headless npm packages and a shadcn registry.
+        </p>
+      </header>
+
+      <section className="flex flex-col gap-3">
+        <h2 className="text-lg font-medium">Packages</h2>
+        <ul className="flex flex-col gap-2">
+          {PACKAGES.map((pkg) => (
+            <li key={pkg.href}>
+              <Link
+                href={pkg.href}
+                className="block rounded-lg border p-4 transition-colors hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+              >
+                <span className="font-mono text-sm font-medium">{pkg.name}</span>
+                <span className="mt-1 block text-sm text-muted-foreground">
+                  {pkg.description}
+                </span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </section>
+    </main>
   )
 }

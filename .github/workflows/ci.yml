@@ -29,6 +29,10 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
+      # www imports workspace packages through their built `dist/`.
+      - name: Build workspace dependencies of www
+        run: pnpm --filter "www^..." build
+
       - run: pnpm --filter www typecheck
       - run: pnpm --filter www lint
       - run: pnpm --filter www registry:build
